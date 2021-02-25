@@ -35,12 +35,6 @@ const columns = [
 
 export default class StudentLwcComponent extends NavigationMixin (LightningElement) {
 
-    
-
-
-
-
-
     @track sObjectName =  'Contact';
     @track fieldSetList;
     @track fieldSetvalue;
@@ -80,6 +74,7 @@ export default class StudentLwcComponent extends NavigationMixin (LightningEleme
     
     // @wire(contactFieldSet, { contactId: '$recordId' })
     @wire(contactFieldSet, {
+        fieldSetName : 'StudentDetails',
         ObjectName : 'Contact'
         // recToReturn : 10
     })
@@ -90,8 +85,6 @@ export default class StudentLwcComponent extends NavigationMixin (LightningEleme
            console.log('get records**********', this.contactRecord);
 
            console.log('get records**********', data);
-
-
 
         //    this.items = data;
            this.totalRecountCount = data.length; //here it is 23
@@ -106,7 +99,8 @@ export default class StudentLwcComponent extends NavigationMixin (LightningEleme
             // this.data = data;
             this.data  =  data.map(
                 record => Object.assign(
-            { 'Account.Name': record.Account.Name},
+            { 'Account.Name': record.Account.Name,
+                'Account.Id' : record.Account.Id},
             record
                 )
              );
@@ -220,8 +214,6 @@ export default class StudentLwcComponent extends NavigationMixin (LightningEleme
                
     }
 
-    
-
     previousHandler() {
         if (this.page > 1) {
             this.page = this.page - 1; //decrease page by 1
@@ -316,37 +308,37 @@ export default class StudentLwcComponent extends NavigationMixin (LightningEleme
 
 
 
-    editRecord(row) {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: row.Id,
-                actionName: 'edit',
-            },
-        });
-    }
-    //currently we are doing client side delete, we can call apex tp delete server side
-    deleteRecord(row) {
-        const { id } = row;
-        const index = this.findRowIndexById(id);
-        if (index !== -1) {
-            this.data = this.data
-                .slice(0, index)
-                .concat(this.data.slice(index + 1));
-        }
-    }
+    // editRecord(row) {
+    //     this[NavigationMixin.Navigate]({
+    //         type: 'standard__recordPage',
+    //         attributes: {
+    //             recordId: row.Id,
+    //             actionName: 'edit',
+    //         },
+    //     });
+    // }
+    // //currently we are doing client side delete, we can call apex tp delete server side
+    // deleteRecord(row) {
+    //     const { id } = row;
+    //     const index = this.findRowIndexById(id);
+    //     if (index !== -1) {
+    //         this.data = this.data
+    //             .slice(0, index)
+    //             .concat(this.data.slice(index + 1));
+    //     }
+    // }
 
-    findRowIndexById(id) {
-        let ret = -1;
-        this.data.some((row, index) => {
-            if (row.id === id) {
-                ret = index;
-                return true;
-            }
-            return false;
-        });
-        return ret;
-    }
+    // findRowIndexById(id) {
+    //     let ret = -1;
+    //     this.data.some((row, index) => {
+    //         if (row.id === id) {
+    //             ret = index;
+    //             return true;
+    //         }
+    //         return false;
+    //     });
+    //     return ret;
+    // }
 
     getSelectedName(event) {
         var selectedRows = event.detail.selectedRows;

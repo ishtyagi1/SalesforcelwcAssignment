@@ -130,7 +130,7 @@ for(Schema.FieldSetMember fieldSet : fieldSetObj.getFields() ) {
                 // }
 
                 // lstfieldWrapper.add(new FieldWrapper('Account Name', 'Account.Name',true,'Account Name',false,8,'STRING',tAttribute, ac));
-                lstfieldWrapper.add(new FieldWrapper('action', 'Actions',false,9,'action',tAttribute));
+                lstfieldWrapper.add(new FieldWrapper('action', 'Actions',false,++counter,'action',tAttribute));
             
             }
         }
@@ -236,15 +236,8 @@ for(Schema.FieldSetMember fieldSet : fieldSetObj.getFields() ) {
 
     public static List<Schema.FieldSetMember> getFields() {
 
-       
-        // Schema.SObjectType s = Schema.getGlobalDescribe().get(ObjectName) ;
-
-        // Schema.DescribeSObjectResult r = s.getDescribe() ;
-
-        // Schema.DescribeSObjectResult describeSObjectResult = Schema.getGlobalDescribe().get(ObjectName).getDescribe();
-        // String ObjectNamee = ObjectName.getSObjectType().getDescribe().getName();
         return SObjectType.Contact.FieldSets.StudentDetails.getFields();
-        // return s.FieldSets.StudentDetails.getFields();
+        
     }
 
     // @AuraEnabled(cacheable=true)
@@ -299,12 +292,12 @@ for(Schema.FieldSetMember fieldSet : fieldSetObj.getFields() ) {
 
 
  @AuraEnabled(cacheable=true)
-    public static List<sObject> getContactList(String ObjectName) {
+    public static List<sObject> getContactList(String fieldSetName, String ObjectName) {
         // System.debug(contactId);
-     Schema.DescribeSObjectResult describeSObjectResult = Schema.getGlobalDescribe().get('Contact').getDescribe();
+     Schema.DescribeSObjectResult describeSObjectResult = Schema.getGlobalDescribe().get(ObjectName).getDescribe();
             // Map<String,Schema.SObjectField> objFieldMap = describeSObjectResult.fields.getMap();
            
-            Schema.FieldSet fieldSetObj = describeSObjectResult.FieldSets.getMap().get('StudentDetails');
+            Schema.FieldSet fieldSetObj = describeSObjectResult.FieldSets.getMap().get(fieldSetName);
 
 
         String query = 'SELECT ';
