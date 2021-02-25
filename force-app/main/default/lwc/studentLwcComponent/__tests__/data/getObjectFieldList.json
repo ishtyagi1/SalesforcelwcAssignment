@@ -1,0 +1,8 @@
+[{"fieldLabel": "First Name", "fieldName": "FirstName", "isHtmlFormatted": false, "isRequired": false, "key": 1},
+    {"fieldLabel": "Last Name", "fieldName": "LastName", "isHtmlFormatted": false, "isRequired": true, "key": 2},
+    {"fieldLabel": "Email", "fieldName": "Email", "isHtmlFormatted": false, "isRequired": false, "key": 3},
+   {"fieldLabel": "Business Phone", "fieldName": "Phone", "isHtmlFormatted": false, "isRequired": false, "key": 4},
+    {"fieldLabel": "Birthdate", "fieldName": "Birthdate", "isHtmlFormatted": false, "isRequired": false, "key": 5},
+    {"fieldLabel": "Account ID", "fieldName": "AccountId", "isHtmlFormatted": false, "isRequired": false, "key": 6},
+    {"fieldLabel": "Contact ID", "fieldName": "Id", "isHtmlFormatted": false, "isRequired": true, "key": 7}
+   ]
