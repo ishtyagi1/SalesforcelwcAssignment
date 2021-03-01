@@ -5,15 +5,11 @@ List <Account> lstAccountsToUpdate = new List <Account>();
  if(Trigger.isInsert || Trigger.isUpdate){
     for(Contact con:trigger.new){
         accountIds.add(con.accountId);
-        System.debug('After:  ' +  accountIds);
-       
-
     }
 }
 if(Trigger.isDelete){
     for(Contact con:trigger.old){
         accountIds.add(con.accountId);
-        System.debug('Deletion:  ' + accountIds);
     }
 }
 
@@ -21,9 +17,7 @@ for(Account acc:[SELECT Id,Name,TotalContacts__c,(Select Id from Contacts) from 
     Account accObj = new Account ();
     accObj.Id = acc.Id;
     accObj.TotalContacts__c = acc.Contacts.size();
-    System.debug('*' + accObj);
     lstAccountsToUpdate.add(accObj);
-    System.debug('**' + lstAccountsToUpdate);
 }
 
 UPDATE lstAccountsToUpdate;
